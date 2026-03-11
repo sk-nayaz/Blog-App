@@ -1,33 +1,147 @@
-### Social login flow:
+MERN Blog Application
 
-1. When user clicks on "SignIn" button, React contact "Clerk" & "Clerk" contacts Google/LinkedIn/GitHub etc servers
+A full-stack blog platform built using the MERN stack (MongoDB, Express, React, Node.js) with secure social authentication powered by Clerk.
 
-2. Those servers verify User creadentials and send ID token(JWT token) back to "Clerk"
+The application supports role-based access control, allowing users to interact with blog posts while enabling authors to create and manage content.
 
-3. "Clerk" creates session and allow the React app to get Social login user object with
-   hooks like useAuth(),useUser(), etc...
+🚀 Features
 
-### With these above 3 steps social login is completed
+Social authentication (Google, GitHub, LinkedIn, etc.)
 
-4. The React app need to navigate to either "UserDashboard " or "AuthorDashboard" after successful login
+Secure session management using Clerk
 
-5. This navigation will be based on "role" property of User object of "Blog app"
+Role-based dashboards
 
-   a. The Header component read user object from database
+Blog creation and management
 
-   b. When a User login for first time, no user obj existed in DB. In that time, the React app will redirect the user to "RoleSelection" component to select a role. After the role selection, it creates new user in DB with that specific role.
+Comment system for users
 
-   c. If user already existed in DB, the React redirect to either "UserDashboard" or "AuthorDashboard" based on "role" property
+Modern React frontend with protected routes
 
-### With the above steps of 4 & 5 , USER or AUTHOR creation is completed###
+🔐 Social Login Flow
 
-6. Actions of AUTHOR
-    a. Create new Blog post
-    b. Read all Blog posts
-    c. Update Blog post
-    d. Delete Blog post
+The authentication flow is handled through Clerk, enabling secure and seamless login.
 
-6. Actions of USER
-    a. Read Blog posts
-    b. Write comment for a Blog post
-   
+Step 1 — User Initiates Login
+
+When a user clicks the Sign In button:
+
+The React application sends a request to Clerk.
+
+Clerk redirects authentication to social providers such as:
+
+Google
+
+GitHub
+
+LinkedIn
+
+Step 2 — Credential Verification
+
+The selected provider verifies the user's credentials.
+
+After successful verification:
+
+The provider sends an ID token (JWT) back to Clerk.
+
+Step 3 — Session Creation
+
+Clerk then:
+
+Creates a secure user session
+
+Provides authentication data to the React app using hooks such as:
+
+useAuth()
+useUser()
+
+At this point, the social login process is successfully completed.
+
+👤 Role-Based Navigation
+
+After authentication, the React application determines where to navigate the user based on their role.
+
+Possible destinations:
+
+UserDashboard
+
+AuthorDashboard
+
+The navigation depends on the role property stored in the database.
+
+🧠 User Role Handling
+1️⃣ Header Component
+
+The Header component retrieves the user object from the database.
+
+2️⃣ First-Time Login
+
+If the user logs in for the first time:
+
+No user record exists in the database.
+
+The application redirects the user to the RoleSelection component.
+
+The user selects a role:
+
+User
+
+Author
+
+After selection:
+
+A new user record is created in the database with the selected role.
+
+3️⃣ Existing User Login
+
+If the user already exists in the database:
+
+The application automatically redirects the user based on their role:
+
+User → UserDashboard
+
+Author → AuthorDashboard
+
+This completes the User or Author account initialization process.
+
+✍️ Author Capabilities
+
+Authors have full control over blog content.
+
+They can:
+
+Create new blog posts
+
+Read all blog posts
+
+Update existing blog posts
+
+Delete blog posts
+
+👀 User Capabilities
+
+Regular users can interact with blog content.
+
+They can:
+
+Read blog posts
+
+Write comments on blog posts
+
+🛠 Tech Stack
+
+Frontend
+
+React
+
+Clerk Authentication
+
+Backend
+
+Node.js
+
+Express.js
+
+Database
+
+MongoDB
